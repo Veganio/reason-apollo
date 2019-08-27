@@ -35,6 +35,18 @@ type linkOptions = {
   "fetchOptions": Js.Nullable.t(Js.Json.t),
 };
 
+type batchLinkOptions = {
+  .
+  "uri": string,
+  "includeExtensions": Js.Nullable.t(bool),
+  "fetch": Js.Nullable.t(fetch),
+  "headers": Js.Nullable.t(Js.Json.t),
+  "credentials": Js.Nullable.t(string),
+  "fetchOptions": Js.Nullable.t(Js.Json.t),
+  "batchMax": Js.Nullable.t(int),
+  "batchInterval": Js.Nullable.t(int),
+};
+
 type uploadLinkOptions = {
   .
   "uri": Js.Nullable.t(string),

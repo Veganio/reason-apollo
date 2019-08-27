@@ -13,6 +13,11 @@ external split: (splitTest => bool, apolloLink, apolloLink) => apolloLink =
 [@bs.module "apollo-link-http"] [@bs.new]
 external createHttpLink: ApolloClient.linkOptions => apolloLink = "HttpLink";
 
+/* Bind the BatchHttpLink class */
+[@bs.module "apollo-link-batch-http"] [@bs.new]
+external createBatchHttpLink: ApolloClient.batchLinkOptions => apolloLink =
+  "BatchHttpLink";
+
 /* Bind the setContext method */
 [@bs.module "apollo-link-context"]
 external apolloLinkSetContext: (unit => Js.t({..})) => apolloLink =
@@ -64,6 +69,33 @@ let createHttpLink =
   });
 };
 
+/**
+ * CreateBatchHttpLink
+ * https://github.com/apollographql/apollo-link/tree/master/packages/apollo-link-http
+ */
+let createBatchHttpLink =
+    (
+      ~uri,
+      ~includeExtensions=?,
+      ~fetch=?,
+      ~headers=?,
+      ~credentials=?,
+      ~fetchOptions=?,
+      ~batchInterval=?,
+      ~batchMax=?,
+      (),
+    ) => {
+  createBatchHttpLink({
+    "uri": uri,
+    "includeExtensions": Js.Nullable.fromOption(includeExtensions),
+    "fetch": Js.Nullable.fromOption(fetch),
+    "headers": Js.Nullable.fromOption(headers),
+    "credentials": Js.Nullable.fromOption(credentials),
+    "fetchOptions": Js.Nullable.fromOption(fetchOptions),
+    "batchInterval": Js.Nullable.fromOption(batchInterval),
+    "batchMax": Js.Nullable.fromOption(batchMax),
+  });
+};
 /**
  * CreateUploadLink
  * https://github.com/jaydenseric/apollo-upload-client#function-createuploadlink
